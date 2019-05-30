@@ -1,0 +1,42 @@
+Arguments: 
+  /usr/local/bin/node /usr/local/bin/yarn add pomelo-logger
+
+PATH: 
+  /usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
+
+Yarn version: 
+  1.16.0
+
+Node version: 
+  10.15.0
+
+Platform: 
+  darwin x64
+
+Trace: 
+  Error: ENOENT: no such file or directory, copyfile '/Users/hujiangjun/Library/Caches/Yarn/v4/npm-is-promise-1.0.1-31573761c057e33c2e91aab9e96da08cefbe76e5/node_modules/is-promise/.npmignore' -> '/Users/hujiangjun/Desktop/dev/server/node_modules/transformers/node_modules/is-promise/.npmignore'
+
+npm manifest: 
+  {
+    "name": "server",
+    "version": "0.0.0",
+    "private": true,
+    "scripts": {
+      "start": "node ./bin/www"
+    },
+    "dependencies": {
+      "cookie-parser": "~1.4.4",
+      "debug": "~2.6.9",
+      "ejs": "^2.6.1",
+      "express": "~4.16.1",
+      "http-errors": "~1.6.3",
+      "jade": "~1.11.0",
+      "morgan": "~1.9.1"
+    }
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile
