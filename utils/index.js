@@ -11,7 +11,7 @@ module.exports = {
 		let responseData = {}
 		responseData.code = code
 		responseData.message = message
-		responseData.data = data
+        responseData.data = data
 		res.status(httpCode).json(responseData)
 	}
 }
