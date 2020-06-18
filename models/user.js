@@ -4,46 +4,44 @@
  * @author hujiangjun<https://github.com/hu-snail>
  */
 
-// const crypto = require('crypto');
-// const { argv } = require('yargs');
 const mongoose = require('mongoose')
 const autoIncrement = require('mongoose-auto-increment');
 
 const userSchema = new mongoose.Schema({
     // 用户名
-    'userName': {type: String, default: ''},
+    userName: String,
     // 用户昵称
-    'nickName': {type: String, required: true, default: ''},
+    nickName: {type: String, required: true, default: ''},
     // 用户密码
-    'password': {type: String, default: ''},
-    // 用户类型 0 普通用户 1 博主
-    'userType': {type: Number, default: 0},
+    password: String,
+    // 用户类型 1 普通用户 2 博主
+    userType: {type: Number, default: 1},
     // 用户手机
-    'phone': {type: String, default: ''},
+    phone: String,
     // 用户头像
-    'avatarUrl': {type: String, default: ''},
-    // 微信openid
-    'openid': {type: String, required: true, default: ''},
-    // 用户性别
-    'gender': {type: String, default: '0'},
+    avatarUrl: String,
+    // 微信openid 用于微信授权
+    openid: String,
+    // 用户性别 1 - 男 2 - 女
+    gender: {type: Number, default: 1},
     // 用户年龄
-    'age': {type: Number, default: 18},
+    age: {type: Number, default: 18},
     // 用户所在城市
-    'city': {type: String, default: '北京'},
+    city: {type: String, default: '北京'},
     // 用户所在省份
-    'province': {type: String, default: '北京'},
+    province: {type: String, default: '北京'},
     // 用户所在国家
-    'country': {type: String, default: '中国'},
+    country: {type: String, default: '中国'},
     // 用户描述
-    'desc': {type: String, default: ''},
+    desc: String,
     // 用户院校
-    'school': {type: String, default: ''},
+    school: String,
     // 用户登录时间
-    'loginTime': {type: Date, default: Date.now},
+    loginTime: {type: Date, default: Date.now},
     // 创建时间
-    'createdTime': {type: Date, default: Date.now},
+    createdTime: {type: Date, default: Date.now},
     // 修改时间
-    'createdTime': {type: Date, default: Date.now},
+    createdTime: {type: Date, default: Date.now},
 })
 // 自增 ID 插件配置
 userSchema.plugin(autoIncrement.plugin, {
