@@ -14,9 +14,9 @@ const catalogSchema = new mongoose.Schema({
     // 创建时间
     createdTime: {type: Date, default: Date.now},
     // 修改时间
-    createdTime: {type: Date, default: Date.now},
+    updateTime: {type: Date, default: Date.now},
 })
-// 自增 ID 插件配置
+// 自增  ID 插件配置
 catalogSchema.plugin(autoIncrement.plugin, {
     model: 'Catalog',
     field: 'id',

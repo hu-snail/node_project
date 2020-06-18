@@ -6,17 +6,22 @@
 
 const mongoose = require('mongoose')
 const autoIncrement = require('mongoose-auto-increment');
+const { number } = require('yargs');
 
 const articleSchema = new mongoose.Schema({
     title: String,
     category: Array,
     gist: String,
     content: String,
-    comments: Array,
+    renderContent: String,
+    readNum: Number,
+    shareNum: Number,
+    catalogId: String,
+    likeNum: Number,
     // 创建时间
     createdTime: {type: Date, default: Date.now},
     // 修改时间
-    createdTime: {type: Date, default: Date.now},
+    updateTime: {type: Date, default: Date.now},
 })
 // 自增 ID 插件配置
 articleSchema.plugin(autoIncrement.plugin, {

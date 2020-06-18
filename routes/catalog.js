@@ -56,7 +56,7 @@ exports.catalogAdd = (req, res) => {
             else {
                 catalog = item
                 const id = genID(10)
-                catalog.children.push({id, title: params.title})
+                catalog.children.unshift({id, title: params.title})
                 save(catalog, res)
             }
         })
