@@ -9,6 +9,10 @@ module.exports = app => {
     app.post('/register', user.register)
     app.get('/getCatalogList', catalog.getCatalogList)
     app.post('/catalogAdd', catalog.catalogAdd),
+    app.post('/catalogUpdateTitle', catalog.catalogUpdateTitle),
+    app.post('/subCatalogUpdateTitle', catalog.subCatalogUpdateTitle),
+    app.post('/catalogDelete', catalog.catalogDelete),
+    app.post('/subcatalogDelete', catalog.subcatalogDelete),
     app.get('/getArticle', article.getArticle),
     app.post('/articleAdd', article.articleAdd)
 }

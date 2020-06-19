@@ -74,3 +74,54 @@ const save = (catalog, res) => {
 const genID = (length) => {
     return Number(Math.random().toString().substr(3, length) + Date.now()).toString(36)
 }
+
+/** 修改一级目录名称 */
+exports.catalogUpdateTitle = (req, res) => {
+    const {_id, title} = req.body
+    Catalog.update({_id}, {$set : {title}}, function(err, data) {
+        if (err) return responseClient(res, Config.HTTP._400, Config.RES_CODE.ERR, '修改目录标题异常', err)
+        else responseClient(res, Config.HTTP._200, Config.RES_CODE.OK, '修改目录标题成功', null)
+    })
+}
+
+/** 修改二级目录名称 */
+exports.subCatalogUpdateTitle = (req, res) => {
+    const {_id, catalogId, title} = req.body
+    Catalog.findById({_id}, function(err, catalog) {
+        catalog.children.map(item => {
+            if (catalogId === item.id) {
+                item.title = title
+                Catalog.update({_id}, {$set: {children: catalog.children}}, function(err, data) {
+                    if (err) return responseClient(res, Config.HTTP._400, Config.RES_CODE.ERR, '修改二级目录标题异常', err)
+                    else responseClient(res, Config.HTTP._200, Config.RES_CODE.OK, '修改二级目录标题成功', null)
+                })
+            }
+        })
+    })
+}
+
+/** 删除一级目录 */
+exports.catalogDelete = (req, res) => {
+    const {_id} = req.body
+    Catalog.remove({_id}, function(err, data) {
+        if (err) return responseClient(res, Config.HTTP._400, Config.RES_CODE.ERR, '删除目录标题异常', err)
+        else responseClient(res, Config.HTTP._200, Config.RES_CODE.OK, '删除目录标题成功', null)
+    })
+}
+
+/** 删除二级目录 */
+exports.subcatalogDelete = (req, res) => {
+    const {_id, catalogId } = req.body
+    Catalog.findById({_id}, function(err, catalog) {
+        catalog.children.map((item, index) => {
+            if (catalogId === item.id) {
+                catalog.children.splice(index, 1)
+                Catalog.update({_id}, {$set: {children: catalog.children}}, function(err, data) {
+                    if (err) return responseClient(res, Config.HTTP._400, Config.RES_CODE.ERR, '删除二级目录标题异常', err)
+                    else responseClient(res, Config.HTTP._200, Config.RES_CODE.OK, '删除二级目录标题成功', null)
+                })
+            }
+        })
+    })
+}
+
