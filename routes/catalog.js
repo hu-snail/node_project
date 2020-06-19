@@ -1,5 +1,6 @@
 const {responseClient} = require('../utils');
 const Catalog = require('../models/catalog')
+const Article = require('../models/article')
 const Config =  require('../config');
 const logger = require('pomelo-logger').getLogger('mongodb-log')
 
@@ -109,13 +110,19 @@ exports.catalogDelete = (req, res) => {
     })
 }
 
-/** 删除二级目录 */
+/**
+ * 删除二级目录 & 删除关联文档
+ * 
+ * */
 exports.subcatalogDelete = (req, res) => {
     const {_id, catalogId } = req.body
     Catalog.findById({_id}, function(err, catalog) {
         catalog.children.map((item, index) => {
             if (catalogId === item.id) {
                 catalog.children.splice(index, 1)
+                Article.remove({catalogId}, function(err, data) {
+                    console.log('删除成功')
+                })
                 Catalog.update({_id}, {$set: {children: catalog.children}}, function(err, data) {
                     if (err) return responseClient(res, Config.HTTP._400, Config.RES_CODE.ERR, '删除二级目录标题异常', err)
                     else responseClient(res, Config.HTTP._200, Config.RES_CODE.OK, '删除二级目录标题成功', null)
