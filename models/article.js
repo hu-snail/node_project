@@ -7,17 +7,18 @@
 const mongoose = require('mongoose')
 const autoIncrement = require('mongoose-auto-increment');
 const { number } = require('yargs');
-
 const articleSchema = new mongoose.Schema({
     title: String,
-    category: Array,
+    tags: {type: Array, default: []},
     gist: String,
     content: String,
+    coverImage: String,
     renderContent: String,
-    readNum: Number,
-    shareNum: Number,
-    catalogId: String,
-    likeNum: Number,
+    // 关联文档的id
+    catalogId: {type: String, index: true},
+    readNum: {type: Number, default: 0},
+    shareNum: {type: Number, default: 0},
+    likeNum: {type: Number, default: 0},
     // 创建时间
     createdTime: {type: Date, default: Date.now},
     // 修改时间
@@ -30,5 +31,6 @@ articleSchema.plugin(autoIncrement.plugin, {
     startAt: 1,
     incrementBy: 1,
 });
+articleSchema.index({ title: "text", content: "text" })
 module.exports = mongoose.model('Article', articleSchema)
 

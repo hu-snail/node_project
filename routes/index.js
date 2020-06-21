@@ -15,4 +15,5 @@ module.exports = app => {
     app.post('/subcatalogDelete', catalog.subcatalogDelete),
     app.get('/getArticle', article.getArticle),
     app.post('/articleAdd', article.articleAdd)
+    app.get('/searchArticles', article.searchArticles)
 }

@@ -2,6 +2,7 @@ const {responseClient} = require('../utils');
 const Catalog = require('../models/catalog')
 const Article = require('../models/article')
 const Config =  require('../config');
+const { number } = require('yargs');
 const logger = require('pomelo-logger').getLogger('mongodb-log')
 
 /** 获取目录列表 */
@@ -50,24 +51,25 @@ exports.catalogAdd = (req, res) => {
         catalog = new Catalog({
             ...params,
         })
-        save(catalog, res)
+        save('', catalog, res)
     } else { // 新增文档目录
         Catalog.findOne({id: params.id}, function(err, item) {
             if (err) return responseClient(res, Config.HTTP._400, Config.RES_CODE.ERR, '新增异常', err)
             else {
                 catalog = item
                 const id = genID(10)
-                catalog.children.unshift({id, title: params.title})
-                save(catalog, res)
+                const {title, pindex} = params
+                catalog.children.unshift({id, title, pindex })
+                save(id, catalog, res)
             }
         })
     }
 }
 
-const save = (catalog, res) => {
+const save = (id, catalog, res) => {
     catalog.save(err => {
         if (err) return responseClient(res, Config.HTTP._400, Config.RES_CODE.ERR, '新增异常', err)
-        else responseClient(res, Config.HTTP._200, Config.RES_CODE.OK, '新增成功', null)
+        else responseClient(res, Config.HTTP._200, Config.RES_CODE.OK, '新增成功', id ? id: null)
     })
 }
 
