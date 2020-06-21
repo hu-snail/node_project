@@ -26,8 +26,7 @@ exports.articleAdd = (req, res) => {
             else {
                 const article = item
                 // 更新数据
-                article.content = params.content
-                article.renderContent = params.renderContent
+               for(let key in params) article[key] = params[key]
                 save(article, res)
             }
         })
