@@ -8,7 +8,9 @@ const ejs = require('ejs')
 const session = require('express-session')
 
 const app = express()
-
+app.get('/', function (req, res) { 
+    res.send('Helloworld\n');
+});
 // 跨域处理
 app.use(cors())
 
