@@ -62,7 +62,7 @@ app.use((err, req, res, next) => {
     res.render('error')
 })
 
-const port = process.env.PORT || 3001;
+const port = process.env.PORT || 8890;
 
 app.listen(port, () => {
     console.log('Express server listening on port ' + port);
