@@ -8,7 +8,10 @@ const mongoose = require('mongoose')
 const autoIncrement = require('mongoose-auto-increment');
 
 const catalogSchema = new mongoose.Schema({
-    title: String,
+    title: {
+        type: String,
+        trim: true
+    },
     children: {type: Array, default: []},
     isAdd: {type: Boolean, default: false},
     // 创建时间

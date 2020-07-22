@@ -106,4 +106,3 @@ exports.register = (req, res) => {
         }
     })
 }
-

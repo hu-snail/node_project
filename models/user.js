@@ -16,6 +16,8 @@ const userSchema = new mongoose.Schema({
     password: String,
     // 用户类型 1 普通用户 2 博主
     userType: {type: Number, default: 1},
+    // 授权类型
+    authorizationType: String,
     // 用户手机
     phone: String,
     // 用户头像
