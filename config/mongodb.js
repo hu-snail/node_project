@@ -33,7 +33,7 @@ exports.connect = () => {
     })
 
     // 连接成功
-    mongoose.connection.once('open', () => {
+    mongoose.connection.once('openUri', () => {
         logger.info('数据库连接成功!')
     })
 
