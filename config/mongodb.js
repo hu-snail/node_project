@@ -24,6 +24,7 @@ exports.connect = () => {
     mongoose.connect(CONFIG.MONGODB.DB_URL, {
         useCreateIndex: true,
         useNewUrlParser: true,
+        useMongoClient: true,
         promiseLibrary: global.Promise
     })
 
@@ -33,7 +34,7 @@ exports.connect = () => {
     })
 
     // 连接成功
-    mongoose.connection.once('openUri', () => {
+    mongoose.connection.once('open', () => {
         logger.info('数据库连接成功!')
     })
 
